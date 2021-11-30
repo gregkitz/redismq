@@ -21,7 +21,7 @@ class Channel(object):
         :param _redis_port: The Redis port.
         """
         self.name = _name
-        self.redis = StrictRedis(decode_responses=True, host=_redis_host, port=_redis_port)
+        self.redis = StrictRedis(decode_responses=True).from_url('rediss://default:6EkZSa20Axya9EUt@db-redis-nyc3-17336-do-user-9096713-0.b.db.ondigitalocean.com:25061')
         self.redis.client_setname(_name)
         self.messages = RQueue(PATTERN.format('messages', self.name), self.redis)
         self.pubsub = self.redis.pubsub(ignore_subscribe_messages=True)
